@@ -3,6 +3,7 @@
 add_library(QcTPC)
 
 target_sources(QcTPC PRIVATE src/PID.cxx
+                             src/Tracking.cxx
                              src/Tracks.cxx
                              src/PIDClusterCheck.cxx
                              src/TrackClusterCheck.cxx
@@ -24,6 +25,7 @@ target_link_libraries(QcTPC
 
 add_root_dictionary(QcTPC
                     HEADERS include/TPC/PID.h
+                            include/TPC/Tracking.h
                             include/TPC/Tracks.h
                             include/TPC/PIDClusterCheck.h
                             include/TPC/TrackClusterCheck.h
