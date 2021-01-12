@@ -22,6 +22,8 @@
 // O2 includes
 #include "Framework/ProcessingContext.h"
 #include "DataFormatsTPC/TrackTPC.h"
+#include "SimulationDataFormat/MCCompLabel.h"
+#include "SimulationDataFormat/MCTruthContainer.h"
 #include "TPCQC/Helpers.h"
 #include <Framework/InputRecord.h>
 #include "GPUO2InterfaceQA.h"
@@ -75,10 +77,12 @@ void Tracking::startOfCycle()
 
 void Tracking::monitorData(o2::framework::ProcessingContext& ctx)
 {
-  using TrackType = std::vector<o2::tpc::TrackTPC>;
-  auto tracks = ctx.inputs().get<TrackType>("inputTracks");
+  auto tracks = ctx.inputs().get<std::vector<o2::tpc::TrackTPC>>("inputTracks");
+  auto trackLabels = ctx.inputs().get<std::vector<o2::MCCompLabel>>("inputTrackLabels");
+  auto clusRefs = ctx.inputs().get<std::vector<o2::tpc::TPCClRefElem>>("inputClusRefs");
   QcInfoLogger::GetInstance() << "monitorData: " << tracks.size() << AliceO2::InfoLogger::InfoLogger::endm;
-  mQCTracking.processTracks(&tracks, nullptr, nullptr);
+  fprintf(stderr, "RECEIVED INPUT\n");
+  //mQCTracking.processTracks(&tracks, &trackLabels, nullptr);
 }
 
 void Tracking::endOfCycle()

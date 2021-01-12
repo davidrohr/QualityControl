@@ -80,6 +80,7 @@ install(FILES run/tpcQCPID_sampled.json
               run/tpcQCPID_direct.json
               run/tpcQCTracks_sampled.json
               run/tpcQCTracks_direct.json
+              run/tpcQCTracking_direct.json
               run/tpcQCClusterChecker.json
               run/tpcQCSimpleTrending.json
               run/tpcQCTrendingClusters.json

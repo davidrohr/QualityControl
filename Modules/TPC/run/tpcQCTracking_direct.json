@@ -1,0 +1,71 @@
+{
+  "qc": {
+    "config": {
+      "database": {
+        "implementation": "CCDB",
+        "host": "ccdb-test.cern.ch:8080",
+        "username": "not_applicable",
+        "password": "not_applicable",
+        "name": "not_applicable"
+      },
+      "Activity": {
+        "number": "42",
+        "type": "2"
+      },
+      "monitoring": {
+        "url": "infologger:///debug?qc"
+      },
+      "consul": {
+        "url": "http://consul-test.cern.ch:8500"
+      },
+      "conditionDB": {
+        "url": "ccdb-test.cern.ch:8080"
+      }
+    },
+    "tasks": {
+      "Tracking": {
+        "active": "true",
+        "className": "o2::quality_control_modules::tpc::Tracking",
+        "moduleName": "QcTPC",
+        "detectorName": "TPC",
+        "cycleDurationSeconds": "10",
+        "maxNumberCycles": "-1",
+        "dataSource": [
+          {
+            "type": "direct",
+            "query": "inputTracks:TPC/TRACKS/0"
+          },
+          {
+            "type": "direct",
+            "query": "inputTrackLabels:TPC/TRACKSMCLBL/0"
+          },
+          {
+            "type": "direct",
+            "query": "inputClusRefs:TPC/CLUSREFS/0"
+          }
+        ],
+        "taskParameters": {
+          "myOwnKey": "myOwnValue"
+        },
+        "location": "remote"
+      }
+    },
+    "checks": {
+      "QcCheck": {
+        "active": "true",
+        "className": "o2::quality_control_modules::skeleton::SkeletonCheck",
+        "moduleName": "QcSkeleton",
+        "policy": "OnAny",
+        "detectorName": "TPC",
+        "dataSource": [{
+          "type": "Task",
+          "name": "Tracking",
+          "MOs": ["example"]
+        }]
+      }
+    }
+  },
+  "dataSamplingPolicies": [
+
+  ]
+}
